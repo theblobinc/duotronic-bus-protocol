@@ -21,7 +21,7 @@ At its most profound, DBP provides the data structure for building advanced cybe
 <hr>
 
 <p align="center">
-  <img src="https://i.imgur.com/7gB7p2H.png" alt="Duotronic Digital Witness for the integer 42" width="800"/>
+  <img src="./spec/digital-witness.png" alt="Duotronic Digital Witness for the integer 42" width="800"/>
   <br>
   <b>Figure 1:</b> A Duotronic Digital Witness for the integer 42. In the optional Duotronic Math layer, a value is not stored directly; it is the calculated result of a defined geometric structure. This object <em>is</em> 42 in its complete context.
 </p>
@@ -109,7 +109,7 @@ This is a powerful metaphor for representing uncertainty and predictive state.
 
 An implementer's primary resource is the full technical standard. This document contains all normative rules, byte-level layouts, cryptographic specifications, and conformance data.
 
-**➡️ [Read the Full DBP v1.1 Specification](./spec/DBP-v1.1.md)**
+**➡️ [Read the Full DBP v1.1 Specification](./spec/duotronic-bus-spec-v1.1.md)**
 
 ### Implementation
 
