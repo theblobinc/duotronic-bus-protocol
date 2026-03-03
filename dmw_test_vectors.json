@@ -1,0 +1,207 @@
+{
+  "schema": "dmw-test-vectors-0.1",
+  "generated_utc": "2026-03-03T02:48:05Z",
+  "description": "Minimal interoperability test vectors for Duotronic Digital Witness decoding + canonical key generation.",
+  "tolerances": {
+    "integer_math": "exact",
+    "canonical_key": "exact string match"
+  },
+  "vectors": [
+    {
+      "id": "dw-42-even_range-m6",
+      "witness": {
+        "version": "dmw-0.1",
+        "Z": 42,
+        "family": "even_range",
+        "m": 6,
+        "center": 1,
+        "weights": [
+          2,
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
+        "occupancy": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "subtract_one": true,
+        "sigma": "topmost-else-topright;clockwise"
+      },
+      "expected": {
+        "raw_sum": 43,
+        "Z": 42,
+        "canonical_key": "m=6|c=1|sub1=1|w=2,4,6,8,10,12|x=1,1,1,1,1,1|σ=topmost-else-topright;clockwise"
+      },
+      "notes": [
+        "Reference witness used throughout the paper.",
+        "Demonstrates subtract_one (offset) and σ anchoring."
+      ]
+    },
+    {
+      "id": "dw-42-even_range-m6-sigma-transform",
+      "witness": {
+        "version": "dmw-0.1",
+        "Z": 42,
+        "family": "even_range",
+        "m": 6,
+        "center": 1,
+        "weights": [
+          8,
+          6,
+          4,
+          2,
+          12,
+          10
+        ],
+        "occupancy": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "subtract_one": true,
+        "sigma": "bottommost-else-topleft;counter-clockwise"
+      },
+      "expected": {
+        "raw_sum": 43,
+        "Z": 42,
+        "canonical_key": "m=6|c=1|sub1=1|w=8,6,4,2,12,10|x=1,1,1,1,1,1|σ=bottommost-else-topleft;counter-clockwise",
+        "weights_expected": [
+          8,
+          6,
+          4,
+          2,
+          12,
+          10
+        ],
+        "occupancy_expected": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "notes": [
+        "Validates σ-based reference-frame transform.",
+        "Decoded Z MUST remain invariant under σ changes."
+      ]
+    },
+    {
+      "id": "dw-0-explicit-nonempty",
+      "witness": {
+        "version": "dmw-0.1",
+        "Z": 0,
+        "family": "explicit_zero_demo",
+        "m": 4,
+        "center": 0,
+        "weights": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "occupancy": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "subtract_one": false,
+        "sigma": "topmost-else-topright;clockwise"
+      },
+      "expected": {
+        "raw_sum": 0,
+        "Z": 0,
+        "canonical_key": "m=4|c=0|sub1=0|w=1,2,3,4|x=0,0,0,0|σ=topmost-else-topright;clockwise"
+      },
+      "notes": [
+        "Explicit zero value distinct from 'absence' (token-free zero / missing)."
+      ]
+    },
+    {
+      "id": "dw-7-uniform-m5",
+      "witness": {
+        "version": "dmw-0.1",
+        "Z": 7,
+        "family": "small_int_demo",
+        "m": 5,
+        "center": 2,
+        "weights": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "occupancy": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "subtract_one": false,
+        "sigma": "topmost-else-topright;clockwise"
+      },
+      "expected": {
+        "raw_sum": 7,
+        "Z": 7,
+        "canonical_key": "m=5|c=2|sub1=0|w=1,1,1,1,1|x=1,1,1,1,1|σ=topmost-else-topright;clockwise"
+      },
+      "notes": [
+        "Sanity-check witness for raw_sum and Z calculations."
+      ]
+    },
+    {
+      "id": "dw-19-sparse-m8",
+      "witness": {
+        "version": "dmw-0.1",
+        "Z": 19,
+        "family": "sparse_occupancy_demo",
+        "m": 8,
+        "center": 3,
+        "weights": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "occupancy": [
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "subtract_one": true,
+        "sigma": "topmost-else-topright;clockwise"
+      },
+      "expected": {
+        "raw_sum": 20,
+        "Z": 19,
+        "canonical_key": "m=8|c=3|sub1=1|w=1,2,3,4,5,6,7,8|x=0,1,0,1,1,1,0,0|σ=topmost-else-topright;clockwise"
+      },
+      "notes": [
+        "Sparsity at vertex level (x_i=0) plus subtract_one offset."
+      ]
+    }
+  ]
+}
