@@ -111,6 +111,12 @@ An implementer's primary resource is the full technical standard. This document 
 
 **➡️ [Read the Full DBP v1.1 Specification](./spec/duotronic-bus-spec-v1.1.md)**
 
+Latest working protocol docs and references:
+- **Protocol reference draft:** [./protocol/duotronic-bus.md](./protocol/duotronic-bus.md)
+- **Duotronic Math v2 reference:** [./protocol/ref/duotronic-math-v2.md](./protocol/ref/duotronic-math-v2.md)
+- **WSB2 reference encoder/decoder (JS):** [./protocol/wsb2_ref.mjs](./protocol/wsb2_ref.mjs)
+- **WSB2 reference encoder/decoder (Python):** [./protocol/wsb2_ref.py](./protocol/wsb2_ref.py)
+
 ### Implementation
 
 The core of any DBP implementation is correctly parsing and validating the 4096-byte frame.
