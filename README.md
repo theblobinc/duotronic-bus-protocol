@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| **Version:** | `v1.1` (Recommended Baseline) |
-| **Status:** | Stable |
+| **Version:** | `v1.x` line (`v1.1` legacy archive + current protocol reference) |
+| **Status:** | Active development (reference docs in `protocol/`) |
 | **Format:** | Fixed-offset 4096-byte binary frame |
 | **Core Type:** | IEEE 754 `binary32` (single-precision float) |
 
@@ -111,14 +111,20 @@ An implementer's primary resource is the full technical standard. This document 
 
 **➡️ [Read the Full DBP Protocol Reference](./protocol/duotronic-bus.md)**
 
-Legacy snapshot:
-- `v1.1` legacy spec archive: [./protocol/ref/duotronic-bus-spec-v1.1-legacy.md](./protocol/ref/duotronic-bus-spec-v1.1-legacy.md)
+### Canonical Document Set
 
-Latest working protocol docs and references:
-- **Protocol reference draft:** [./protocol/duotronic-bus.md](./protocol/duotronic-bus.md)
+- **Protocol reference:** [./protocol/duotronic-bus.md](./protocol/duotronic-bus.md)
 - **Duotronic Math v2 reference:** [./protocol/ref/duotronic-math-v2.md](./protocol/ref/duotronic-math-v2.md)
 - **WSB2 reference encoder/decoder (JS):** [./protocol/wsb2_ref.mjs](./protocol/wsb2_ref.mjs)
 - **WSB2 reference encoder/decoder (Python):** [./protocol/wsb2_ref.py](./protocol/wsb2_ref.py)
+- **Legacy v1.1 snapshot archive:** [./protocol/ref/duotronic-bus-spec-v1.1-legacy.md](./protocol/ref/duotronic-bus-spec-v1.1-legacy.md)
+
+### Quick Verification
+
+```bash
+node protocol/wsb2_ref.mjs
+python protocol/wsb2_ref.py
+```
 
 ### Implementation
 

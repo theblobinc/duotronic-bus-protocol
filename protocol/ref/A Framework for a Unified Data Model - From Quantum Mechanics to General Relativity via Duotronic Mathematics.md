@@ -6,6 +6,21 @@
 **Status:** Working paper (engineering + theory bridge)
 **Version:** draft 0.2 (comprehensive + implementation-ready appendices)
 
+### Canonical Alignment Note (March 2026)
+
+This document is a theory-plus-engineering companion paper.
+
+Normative protocol behavior and current implementation contracts are defined in:
+- `../duotronic-bus.md` (DBP protocol reference)
+- `./duotronic-math-v2.md` (Duotronic Math v2 reference)
+
+Sparse witness transport (Option B / `WSB2`) implementation references:
+- `../wsb2_ref.mjs`
+- `../wsb2_ref.py`
+
+Legacy historical snapshot:
+- `./duotronic-bus-spec-v1.1-legacy.md`
+
 ---
 
 ## Abstract
