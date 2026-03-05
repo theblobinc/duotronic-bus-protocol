@@ -34,6 +34,27 @@ Use these as the authoritative source set:
 Companion working-theory paper:
 - `./protocol/ref/A Framework for a Unified Data Model - From Quantum Mechanics to General Relativity via Duotronic Mathematics.md`
 
+## Digital Witness (DM layer)
+
+DBP can transport witness-encoded semantics from Duotronic Math. A witness is an 8-feature object that carries value plus structural context.
+
+<p align="center">
+  <img src="./protocol/digital-witness.png" alt="Duotronic Digital Witness for integer 42" width="800"/>
+  <br>
+  <b>Figure:</b> Example digital witness geometry used in the optional Duotronic Math layer.
+</p>
+
+Practical rules:
+- Witness feature order is fixed and profile-governed.
+- Token-free zero (`[0,0,0,0,0,0,0,0]`) means absence, not numeric zero.
+- Structural DBP cells (header/trailer/footer and other profile-structural integer lanes) MUST NOT be witness-encoded.
+- If sparse transport is needed, use `WSB2` over authenticated ABB `opaque_bytes` lanes (Option B).
+
+Primary references:
+- `./protocol/ref/duotronic-math-v2.md`
+- `./protocol/wsb2_ref.mjs`
+- `./protocol/wsb2_ref.py`
+
 ## Frame Layout (v1.x)
 
 | Region | Cells | Bytes | Class |
