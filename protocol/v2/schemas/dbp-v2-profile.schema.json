@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dbp/v2/dbp-v2-profile.schema.json",
+  "title": "DBP v2 Semantic Profile",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "profile_version",
+    "wire_class",
+    "security_required",
+    "transport_before_semantics",
+    "normal_form_before_trust",
+    "absence_zero_policy"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string"
+    },
+    "profile_version": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "wire_class": {
+      "const": "DBP2-F4096"
+    },
+    "security_required": {
+      "enum": [
+        "S2"
+      ]
+    },
+    "payload_profiles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema_hash": {
+      "type": "string"
+    },
+    "normalizer_hash": {
+      "type": "string"
+    },
+    "family_registry_hash": {
+      "type": "string"
+    },
+    "transport_profile_hash": {
+      "type": "string"
+    },
+    "export_policy": {
+      "enum": [
+        "positive_index",
+        "nonnegative_corrected",
+        "raw_transport_integer",
+        "normalized_float"
+      ]
+    },
+    "absence_zero_policy": {
+      "enum": [
+        "strict_distinction"
+      ]
+    },
+    "transport_before_semantics": {
+      "const": true
+    },
+    "normal_form_before_trust": {
+      "const": true
+    },
+    "failure_behavior": {
+      "enum": [
+        "reject",
+        "audit_only",
+        "transport_bypass",
+        "family_bypass",
+        "lookup_bypass",
+        "full_bypass"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

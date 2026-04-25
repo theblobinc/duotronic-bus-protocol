@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dbp/v2/wsb2-v2.schema.json",
+  "title": "WSB2 Sparse Witness Payload v2 Logical Schema",
+  "type": "object",
+  "required": [
+    "magic",
+    "version",
+    "overlay_id",
+    "rows",
+    "cols",
+    "present_count",
+    "flags",
+    "bitmap",
+    "packed_rows"
+  ],
+  "properties": {
+    "magic": {
+      "const": "WSB2"
+    },
+    "version": {
+      "const": 2
+    },
+    "overlay_id": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "rows": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "cols": {
+      "const": 8
+    },
+    "present_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "flags": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "semantic_profile_hash": {
+      "type": "string"
+    },
+    "bitmap": {
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "packed_rows": {
+      "type": "string",
+      "contentEncoding": "base64"
+    },
+    "crc32": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    }
+  },
+  "additionalProperties": false
+}

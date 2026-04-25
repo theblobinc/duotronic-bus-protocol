@@ -1,0 +1,23 @@
+{
+  "descriptor_version": "dbp-semantic-descriptor@v2",
+  "wire_class": "DBP2-F4096",
+  "dbp_profile_id": "dbp-duotronics-witness-authority-s2-v1",
+  "dbp_profile_version": 1,
+  "security_required": "S2",
+  "payload_profiles": [
+    "Witness8",
+    "WSB2",
+    "DPFC-object-ref",
+    "gcd-jump-gate",
+    "dw-ssm-event"
+  ],
+  "schema_hash": "sha256:REPLACE_WITH_SCHEMA_HASH",
+  "normalizer_hash": "sha256:REPLACE_WITH_NORMALIZER_HASH",
+  "family_registry_hash": "sha256:REPLACE_WITH_FAMILY_REGISTRY_HASH",
+  "transport_profile_hash": "sha256:REPLACE_WITH_TRANSPORT_PROFILE_HASH",
+  "export_policy": "positive_index",
+  "absence_zero_policy": "strict_distinction",
+  "transport_before_semantics": true,
+  "normal_form_before_trust": true,
+  "failure_behavior": "transport_bypass"
+}

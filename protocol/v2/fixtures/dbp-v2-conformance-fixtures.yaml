@@ -1,0 +1,89 @@
+fixture_pack: dbp-v2-draft-fixtures
+version: 1
+fixtures:
+  - fixture_id: DBP2-FIXTURE-1-MAGIC-SELECTS-V2
+    given:
+      magic_hex: '0xDB20'
+      version: 20
+    operation: select_parser
+    expected:
+      parser: DBP2-F4096
+
+  - fixture_id: DBP2-FIXTURE-2-TRANSPORT-BEFORE-SEMANTICS
+    given:
+      frame_shape_valid: true
+      s2_integrity: failed
+      payload_kind: witness8_dense
+    operation: receive_frame
+    expected:
+      semantic_decode_allowed: false
+      trust_status: rejected
+      authority: 0
+
+  - fixture_id: DBP2-FIXTURE-3-WITNESS8-ABSENCE-NOT-ZERO
+    given:
+      witness8_row: [0, 0, 0, 0, 0, 0, 0, 0]
+      transport_valid: true
+    operation: decode_witness8
+    expected:
+      presence_status: token_free_absent
+      numeric_zero_inferred: false
+      trusted_for_lookup: false
+
+  - fixture_id: DBP2-FIXTURE-4-PRESENT-NUMERIC-ZERO
+    given:
+      witness8_row: [0.0, 0.6, 1.0, 0.125, 1.0, 0.5, 1.0, 1.0]
+      profile_declares_numeric_zero: true
+      transport_valid: true
+      canonicalization_result: canonical_success
+    operation: decode_witness8
+    expected:
+      presence_status: present_zero_value
+      token_free_absent: false
+
+  - fixture_id: DBP2-FIXTURE-5-GCD-JUMP-RAW-IS-CANDIDATE-ONLY
+    given:
+      gcd_jump: 5
+      transport_valid: true
+      canonicalization_result: raw_only
+      policy_mode: normal
+    operation: compute_authority
+    expected:
+      candidate_jump_detected: true
+      authority: 0
+      trusted_memory_write: false
+
+  - fixture_id: DBP2-FIXTURE-6-GCD-JUMP-CANONICAL-MAY-RAISE-AUTHORITY
+    given:
+      gcd_jump: 5
+      transport_valid: true
+      canonicalization_result: canonical_success
+      normalizer_confidence: 1.0
+      policy_mode: normal
+    operation: compute_authority
+    expected:
+      candidate_jump_detected: true
+      authority_may_be_positive: true
+      policy_clamp_required: true
+
+  - fixture_id: DBP2-FIXTURE-7-FULL-DUPLEX-DIRECTION-REPLAY-BLOCKED
+    given:
+      original_direction: uplink
+      replayed_as: downlink
+      s2_integrity_binding_includes_direction: true
+    operation: verify_frame
+    expected:
+      accepted: false
+      failure_code: direction_replay
+
+  - fixture_id: DBP2-FIXTURE-8-LOW-CONFIDENCE-DOES-NOT-INCREASE-AUTHORITY
+    given:
+      transport_valid: true
+      canonicalization_result: canonical_success_low_confidence
+      normalizer_confidence: 0.34
+      requested_authority: 1.0
+      policy_limit: 1.0
+    operation: compute_authority
+    expected:
+      authority_max: 0.34
+      lookup_authority_increased: false

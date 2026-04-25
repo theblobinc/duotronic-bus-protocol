@@ -21,11 +21,34 @@ Tradeoff accepted by design:
 - simpler receiver logic,
 - deterministic decode and validation behavior.
 
+
+
+## DBP v2 Draft Line
+
+DBP v2 is now staged under `./protocol/v2/` as a parallel protocol line. It keeps the fixed `4096` byte frame model but adds a Duotronics-aware semantic boundary:
+
+```text
+DBP frame validity != semantic validity != canonical identity != policy authority
+```
+
+Start here:
+
+- v2 protocol reference: `./protocol/v2/duotronic-bus-v2.md`
+- recommended S2 authority profile: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
+- full-duplex profile: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
+- migration guide: `./protocol/v2/migration-v1-to-v2.md`
+- draft fixtures: `./protocol/v2/fixtures/dbp-v2-conformance-fixtures.yaml`
+
+Conceptually, DBP is complementary to Duotronics: DBP protects and structures the bytes; Duotronics defines witness semantics, canonicalization, registry identity, normalizer behavior, recurrence gates, and policy authority after transport validation succeeds.
+
 ## Canonical Documents
 
 Use these as the authoritative source set:
 
-- Protocol reference: `./protocol/duotronic-bus.md`
+- Protocol reference (v1.x): `./protocol/duotronic-bus.md`
+- Protocol reference (v2 draft): `./protocol/v2/duotronic-bus-v2.md`
+- DBP v2 S2 authority profile: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
+- DBP v2 full-duplex profile: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
 - Duotronic Math v2 reference: `./protocol/ref/duotronic-math-v2.md`
 - WSB2 reference encoder/decoder (JS): `./protocol/wsb2_ref.mjs`
 - WSB2 reference encoder/decoder (Python): `./protocol/wsb2_ref.py`
@@ -265,3 +288,16 @@ python protocol/wsb2_ref.py
 ## License
 
 See `LICENSE`.
+
+
+### DBP v2 added layout
+
+```text
+protocol/v2/
+  duotronic-bus-v2.md                  # Main DBP v2 draft specification
+  migration-v1-to-v2.md                # Migration guide from v1.x
+  profiles/                            # Production and full-duplex v2 profiles
+  schemas/                             # Draft JSON schema skeletons
+  fixtures/                            # Draft conformance fixtures
+  ref/                                 # Constants and source alignment notes
+```
