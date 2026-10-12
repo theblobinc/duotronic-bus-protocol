@@ -1,6 +1,10 @@
 name: ci
 on: [push, pull_request]
 
+defaults:
+  run:
+    working-directory: protocol/v3
+
 jobs:
   generated-artifacts:
     runs-on: ubuntu-latest
