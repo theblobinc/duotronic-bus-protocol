@@ -1,8 +1,14 @@
 ﻿# Duotronic Bus Protocol (DBP)
-**Last updated:** 2026-03-04  
-**Protocol line:** v1.x (fixed-offset Float32 frame, optional polygon witness semantics)  
-**Recommended version:** v1.1  
+**Status:** Historical compatibility reference; retained for DBP v1.x implementations
+**Protocol line:** v1.x (fixed-offset Float32 frame, optional polygon witness semantics)
+**Latest v1.x revision:** v1.1
 **Wire format:** IEEE 754 binary32 (single-precision float), little-endian byte order
+
+> **Version boundary:** DBP v3 is the canonical protocol for current and future
+> development. This document specifies only the legacy v1.x 4096-byte,
+> 1024-cell Float32 format; its normative requirements do not describe DBP v3.
+> For current work, use the [DBP v3 overview](./v3/README.md), [v3
+> specification](./v3/docs/DBP-V3-SPEC.md), and [v3 wire ABI](./v3/docs/WIRE-ABI.md).
 
 DBP is a bi-directional multiplexed signal bus for transporting three classes of state in one frame:
 - Analog (continuous floats)
@@ -1539,7 +1545,9 @@ This keeps protocol telemetry and vector-search infrastructure aligned.
 
 ## 11) Sustainability policy
 
-DBP v1.1 is the intended final major refinement of fixed-offset Float32 packing.
+When this v1.x specification was written, v1.1 was intended as the final major
+refinement of fixed-offset Float32 packing. DBP v3 is now canonical for current
+and future protocol development.
 
 If new requirements demand repeated multi-cell packing workarounds, that is a migration trigger for v2.0 schema-based wire format (e.g., FlatBuffers/Cap'n Proto class solutions).
 

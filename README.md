@@ -1,25 +1,21 @@
 # Duotronic Bus Protocol (DBP)
 
-DBP is a fixed-shape binary protocol for real-time state fanout.
+DBP is a protocol family for secure real-time state and communications.
 
-- Frame size: `4096` bytes
-- Shape: `1024` IEEE-754 Float32 cells
-- Model: positional multiplexing by fixed cell offsets
+- Current canonical line: DBP v3 (`DBP3-F256 / F512 / F1024 / F2048 / F4096`)
 - Status: DBP v3 draft development; v1.x and v2 references are retained
 
-DBP treats a frame as three things at once:
-- a transport payload,
-- a deterministic state snapshot,
-- a vector-friendly numeric object.
+The fixed-shape Float32 frame described by the v1.x reference is a historical
+wire format. It does not describe the v3 byte-native frame family.
 
-## Why DBP
+## Historical DBP v1.x
 
-Most real-time systems split responsibilities across multiple channels and formats. DBP collapses that into one primitive: the frame. Instead of message parsing and schema negotiation at runtime, DBP uses fixed positions with known semantics.
+DBP v1.x used a fixed 4096-byte frame of 1024 IEEE-754 Float32 cells for
+real-time state fanout. Its fixed offsets traded per-frame overhead for simpler,
+deterministic decoding.
 
-Tradeoff accepted by design:
-- fixed overhead per frame,
-- simpler receiver logic,
-- deterministic decode and validation behavior.
+That design is retained for existing v1.x implementations only. New protocol
+work belongs in the current canonical DBP v3 line.
 
 ## DBP v3 Draft Line
 
@@ -39,9 +35,10 @@ The v3 reference implementation and conformance material live alongside the
 specification in `./protocol/v3/`.
 
 
-## DBP v2 Draft Line
+## Historical DBP v2 Draft Line
 
-DBP v2 is now staged under `./protocol/v2/` as a parallel protocol line. It keeps the fixed `4096` byte frame model but adds a Duotronics-aware semantic boundary:
+DBP v2 is retained under `./protocol/v2/` as a historical draft. It keeps the
+fixed `4096` byte frame model and adds a Duotronics-aware semantic boundary:
 
 ```text
 DBP frame validity != semantic validity != canonical identity != policy authority
@@ -50,35 +47,43 @@ DBP frame validity != semantic validity != canonical identity != policy authorit
 Start here:
 
 - v2 protocol reference: `./protocol/v2/duotronic-bus-v2.md`
-- recommended S2 authority profile: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
-- full-duplex profile: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
+- v2 S2 authority profile example: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
+- v2 full-duplex profile example: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
 - migration guide: `./protocol/v2/migration-v1-to-v2.md`
 - draft fixtures: `./protocol/v2/fixtures/dbp-v2-conformance-fixtures.yaml`
 
 Conceptually, DBP is complementary to Duotronics: DBP protects and structures the bytes; Duotronics defines witness semantics, canonicalization, registry identity, normalizer behavior, recurrence gates, and policy authority after transport validation succeeds.
 
-## Canonical Documents
+## Versioned Protocol Documents
 
-Use these as the authoritative source set:
+DBP v3 is the current canonical source. The v1.x and v2 links below are
+historical references retained for compatibility:
 
-- Protocol reference (v1.x): `./protocol/duotronic-bus.md`
-- Protocol reference (v2 draft): `./protocol/v2/duotronic-bus-v2.md`
-- Protocol overview (v3 draft): `./protocol/v3/README.md`
-- Protocol specification (v3 draft): `./protocol/v3/docs/DBP-V3-SPEC.md`
+- Historical protocol reference (v1.x): `./protocol/duotronic-bus.md`
+- Historical protocol draft (v2): `./protocol/v2/duotronic-bus-v2.md`
+- Canonical protocol overview (v3): `./protocol/v3/README.md`
+- Canonical protocol specification (v3): `./protocol/v3/docs/DBP-V3-SPEC.md`
 - Wire ABI (v3): `./protocol/v3/docs/WIRE-ABI.md`
-- DBP v2 S2 authority profile: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
-- DBP v2 full-duplex profile: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
+- Historical v2 S2 authority profile: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
+- Historical v2 full-duplex profile: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
 - Duotronic Math v2 reference: `./protocol/ref/duotronic-math-v2.md`
-- WSB2 reference encoder/decoder (JS): `./protocol/wsb2_ref.mjs`
-- WSB2 reference encoder/decoder (Python): `./protocol/wsb2_ref.py`
+- Legacy WSB2 reference encoder/decoder (JS): `./protocol/wsb2_ref.mjs`
+- Legacy WSB2 reference encoder/decoder (Python): `./protocol/wsb2_ref.py`
 - Legacy v1.1 snapshot archive: `./protocol/ref/duotronic-bus-spec-v1.1-legacy.md`
 
 Companion working-theory paper:
 - `./protocol/ref/A Framework for a Unified Data Model - From Quantum Mechanics to General Relativity via Duotronic Mathematics.md`
 
-## Digital Witness (DM layer)
+The detailed v1.x frame, security, band, and transport sections below describe
+only the historical fixed-shape wire format. They are not requirements for DBP
+v3.
 
-DBP can transport witness-encoded semantics from Duotronic Math. A witness is an 8-feature object that carries value plus structural context.
+## Historical Digital Witness Illustration (DMW 0.1)
+
+The following illustration and vectors document a standalone DMW 0.1 example
+associated with the older Float32 protocol material. They are not DBP v3 wire
+conformance vectors or v3 Witness authority objects. DBP v3 treats Witness as
+external canonical evidence; see `./protocol/v3/docs/WITNESS-CONTRACT.md`.
 
 <p align="center">
   <img src="./protocol/digital-witness.png" alt="Duotronic Digital Witness for integer 42" width="800"/>
@@ -86,18 +91,19 @@ DBP can transport witness-encoded semantics from Duotronic Math. A witness is an
   <b>Figure:</b> Example digital witness geometry used in the optional Duotronic Math layer.
 </p>
 
-Practical rules:
+Historical v1.x/DMW example rules:
 - Witness feature order is fixed and profile-governed.
 - Token-free zero (`[0,0,0,0,0,0,0,0]`) means absence, not numeric zero.
 - Structural DBP cells (header/trailer/footer and other profile-structural integer lanes) MUST NOT be witness-encoded.
-- If sparse transport is needed, use `WSB2` over authenticated ABB `opaque_bytes` lanes (Option B).
+- In historical v1.x/v2 ABB profiles, sparse transport may use `WSB2` over
+  authenticated `opaque_bytes` lanes. This is not DBP v3 guidance.
 
 Primary references:
 - `./protocol/ref/duotronic-math-v2.md`
 - `./protocol/wsb2_ref.mjs`
 - `./protocol/wsb2_ref.py`
 
-## Frame Layout (v1.x)
+## Historical Frame Layout (v1.x only)
 
 | Region | Cells | Bytes | Class |
 |---|---:|---:|---|
@@ -200,9 +206,10 @@ Hardened MUX adjustment:
 - Band 6 effective borrow max: `316` cells (`948` bytes)
 - hardened total with Band 4 + 5 + 6: `2820` bytes/frame
 
-## WSB2 Sparse Witness Transport (Option B)
+## Historical WSB2 Sparse Witness Transport (v1.x/v2 ABB extension)
 
-WSB2 is a sparse witness payload format designed for ABB `opaque_bytes` lanes.
+WSB2 is a sparse witness payload format designed for v1.x/v2 ABB `opaque_bytes`
+lanes. It is not part of the DBP v3 wire format or profile contract.
 
 Use case:
 - keep semantic model dense (`R x 8` witness rows),
@@ -302,11 +309,10 @@ python protocol/wsb2_ref.py
 
 ## Compatibility and Evolution
 
-- `v1.x` remains fixed-shape Float32 frame line.
-- Legacy v1.1 snapshot is retained for archive/regression purposes.
-- DBP v3 is the current protocol development line; see `protocol/v3/README.md`
-  and `protocol/v3/docs/DBP-V3-SPEC.md`.
-- DBP v2 draft material remains available under `protocol/v2/`.
+- DBP v3 is the canonical protocol for current and future development; see
+  `protocol/v3/README.md` and `protocol/v3/docs/DBP-V3-SPEC.md`.
+- v1.x and v2 materials remain available as versioned historical references
+  for compatibility and research. They do not define the v3 wire protocol.
 - Earlier protocol versions and the v3 draft are covered by the repository's
   dual license.
 
@@ -316,7 +322,7 @@ The entire repository is dual-licensed under MIT or Apache-2.0, at your
 option. See `LICENSE`, `LICENSE-MIT`, and `LICENSE-APACHE`.
 
 
-### DBP v2 added layout
+### Historical DBP v2 layout
 
 ```text
 protocol/v2/

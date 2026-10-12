@@ -1,6 +1,8 @@
 import { crc32IsoHdlc } from "./dbp_ref.mjs";
 import { fileURLToPath } from "url";
 
+// Legacy WSB2 sparse-witness payload reference for v1.x/v2 ABB profiles.
+// This is not the DBP v3 wire format or profile contract.
 export const WSB2_MAGIC_TEXT = "WSB2";
 export const WSB2_VERSION = 1;
 export const WSB2_COLS = 8;

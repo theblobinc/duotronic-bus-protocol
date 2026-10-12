@@ -4,7 +4,11 @@
 **Version:** dbp-v2-draft-2026-04-25  
 **Wire class:** `DBP2-F4096` fixed 4096-byte frame  
 **Relationship to Duotronics:** complementary transport boundary used by Duotronics, not a replacement for DPFC, the Witness Contract, or Duotronic semantic math  
-**Recommended production profile:** `dbp-duotronics-witness-authority-s2-v1`
+**Historical v2 draft profile example:** `dbp-duotronics-witness-authority-s2-v1`
+
+> DBP v3 is the canonical protocol for current and future development. This
+> document records the DBP v2 draft only and is retained for compatibility and
+> research; do not use it as a specification for new implementations.
 
 ---
 

@@ -514,7 +514,9 @@ This keeps protocol telemetry and vector-search infrastructure aligned.
 
 ## 11) Sustainability policy
 
-DBP v1.1 is the intended final major refinement of fixed-offset Float32 packing.
+When this historical v1.x specification was written, v1.1 was intended as the
+final major refinement of fixed-offset Float32 packing. DBP v3 is now canonical
+for current and future protocol development.
 
 If new requirements demand repeated multi-cell packing workarounds, that is a migration trigger for v2.0 schema-based wire format (e.g., FlatBuffers/Cap’n Proto class solutions).
 
@@ -1929,4 +1931,3 @@ console.log("crc_hex", "0x" + crc.toString(16).padStart(8, "0"));
 ---
 
 *End of specification*
-

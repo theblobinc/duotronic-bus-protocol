@@ -1,6 +1,13 @@
 # Migration Guide: DBP v1.x to DBP v2
 
-This guide upgrades the existing DBP repository without deleting v1.x.
+> **Historical migration note:** DBP v3 is now the canonical protocol for
+> current and future development. This guide records the earlier v1.x-to-v2
+> draft path only; it is not guidance for new implementations or a migration
+> path to v3. See the [DBP v3 overview](../v3/README.md), [specification](../v3/docs/DBP-V3-SPEC.md),
+> and [release gates](../v3/docs/RELEASE-GATES.md).
+
+This guide documents the earlier v1.x-to-v2 draft transition. It remains for
+historical reference and does not update the v1.x specification.
 
 ## 1. Keep v1 stable
 

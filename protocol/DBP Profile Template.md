@@ -1,8 +1,13 @@
-# DBP Profile Template (v1.1 baseline)
+# DBP Profile Template (Historical v1.1 baseline)
 
 > **Purpose:** This template is a *profile contract* for the Duotronic Bus Protocol (DBP).  
 > DBP core defines the fixed 4096-byte Float32 frame. **Profiles define semantics.**  
-> Fill this in for each application that rides on DBP.
+> **Status:** Legacy-only template for existing v1.1 integrations; it is not a
+> DBP v3 profile template. DBP v3 is the canonical line for current and future
+> work. Start with the [v3 profile composition rules](./v3/docs/PROFILE-COMPOSITION.md),
+> [operational profile schema](./v3/schemas/profile.schema.json), and
+> [profile admission documentation](./v3/docs/DBP-V3-SPEC.md).
+> Do not use this template to define new DBP profiles.
 
 ---
 

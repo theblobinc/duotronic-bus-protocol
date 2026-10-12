@@ -1,5 +1,9 @@
 # Protocol v2
 
+> **Status:** Historical draft; DBP v3 is the canonical protocol for current
+> and future development. This material is retained for compatibility and
+> research and does not define or extend the v3 wire protocol.
+
 This directory contains the DBP v2 draft protocol line.
 
 DBP v2 keeps the existing fixed 4096-byte frame model but upgrades the semantic boundary so DBP can serve as a first-class transport layer for Duotronics, Witness8, WSB2, DPFC object references, GCD-jump sparse event gates, and DW-SSM event contexts.
@@ -11,8 +15,8 @@ protocol/v2/
   duotronic-bus-v2.md                         # Main v2 protocol specification
   migration-v1-to-v2.md                       # Practical migration plan
   profiles/
-    dbp-duotronics-witness-authority-s2-v1.md # Recommended production profile
-    dbp-full-duplex-witness-s2-mux-v1.md      # Full-duplex profile
+    dbp-duotronics-witness-authority-s2-v1.md # Historical v2 draft profile
+    dbp-full-duplex-witness-s2-mux-v1.md      # Historical v2 draft profile
   schemas/
     dbp-v2-profile.schema.json                # Profile schema skeleton
     wsb2-v2.schema.json                       # WSB2 v2 payload schema skeleton
@@ -38,9 +42,10 @@ The main protocol rule is transport-before-semantics:
 shape -> structural validation -> integrity/security -> replay -> decrypt -> lane manifest -> payload decode -> normalizer -> canonicalization -> policy gate
 ```
 
-## Recommended implementation target
+## Historical draft profile examples
 
-For production Duotronics integrations, target:
+The following names describe v2 draft profiles only; they are not current DBP
+implementation recommendations:
 
 ```text
 dbp-duotronics-witness-authority-s2-v1

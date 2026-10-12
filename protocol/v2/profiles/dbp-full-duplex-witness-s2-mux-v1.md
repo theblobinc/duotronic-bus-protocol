@@ -4,7 +4,11 @@
 **Base profile:** `dbp-duotronics-witness-authority-s2-v1`  
 **Wire class:** `DBP2-F4096`  
 **Security:** S2 required  
-**Status:** Draft
+**Status:** Historical v2 draft profile
+
+> DBP v3 is the canonical protocol for current and future development. This
+> profile is retained for v2 compatibility/research only; it does not define a
+> v3 profile or full-duplex contract.
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "schema": "dmw-test-vectors-0.1",
   "generated_utc": "2026-03-03T02:48:05Z",
-  "description": "Minimal interoperability test vectors for Duotronic Digital Witness decoding + canonical key generation.",
+  "description": "Historical DMW 0.1 arithmetic/canonical-key examples; not DBP v3 wire-conformance vectors or v3 Witness authority objects.",
   "tolerances": {
     "integer_math": "exact",
     "canonical_key": "exact string match"

@@ -1,5 +1,7 @@
 import crypto from "crypto";
 
+// Legacy DBP v1.x fixed-shape Float32 reference helpers. DBP v3 uses the
+// versioned implementation and wire ABI under ./v3/ instead.
 export const DBP_CELLS = 1024;
 export const DBP_BYTES = 4096;
 export const CRC_INPUT_BYTES = 4080; // bytes[0..4079]

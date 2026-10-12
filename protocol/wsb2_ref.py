@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+# Legacy WSB2 sparse-witness payload reference for v1.x/v2 ABB profiles.
+# This is not the DBP v3 wire format or profile contract.
 import binascii
 import math
 import struct
