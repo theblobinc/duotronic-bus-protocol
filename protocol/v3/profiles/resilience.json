@@ -1,0 +1,11 @@
+{
+  "schema": "dbp3-resilience-profile/v1",
+  "interleave_depths": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "rule": "FEC applies after protection. Interleaving is deterministic and profile-bound. Unauthenticated feedback cannot increase resource allocation.",
+  "baseline_fec": "gf256-systematic"
+}

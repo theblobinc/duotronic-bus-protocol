@@ -1,0 +1,13 @@
+repos:
+  - repo: local
+    hooks:
+      - id: dbp3-generated-artifacts
+        name: DBP3 ordered semantic + generated-artifact freshness gate
+        entry: python tools/verify_generated_artifacts.py
+        language: system
+        pass_filenames: false
+      - id: dbp3-vectors
+        name: DBP3 golden vector decode verification
+        entry: python tools/verify_vectors.py
+        language: system
+        pass_filenames: false

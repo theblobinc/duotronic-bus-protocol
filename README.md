@@ -5,7 +5,7 @@ DBP is a fixed-shape binary protocol for real-time state fanout.
 - Frame size: `4096` bytes
 - Shape: `1024` IEEE-754 Float32 cells
 - Model: positional multiplexing by fixed cell offsets
-- Status: active `v1.x` line development (`v1.1` legacy snapshot retained)
+- Status: DBP v3 draft development; v1.x and v2 references are retained
 
 DBP treats a frame as three things at once:
 - a transport payload,
@@ -21,6 +21,22 @@ Tradeoff accepted by design:
 - simpler receiver logic,
 - deterministic decode and validation behavior.
 
+## DBP v3 Draft Line
+
+DBP v3 is staged under `./protocol/v3/` as the current byte-native protocol
+line. It defines a family of frame widths and adds secure sessions, records,
+transactions, receipts, communications, and resilient federation.
+
+Start here:
+
+- v3 overview: `./protocol/v3/README.md`
+- v3 specification: `./protocol/v3/docs/DBP-V3-SPEC.md`
+- wire ABI: `./protocol/v3/docs/WIRE-ABI.md`
+- release gates: `./protocol/v3/docs/RELEASE-GATES.md`
+- changelog: `./protocol/v3/CHANGELOG.md`
+
+The v3 reference implementation and conformance material live alongside the
+specification in `./protocol/v3/`.
 
 
 ## DBP v2 Draft Line
@@ -47,6 +63,9 @@ Use these as the authoritative source set:
 
 - Protocol reference (v1.x): `./protocol/duotronic-bus.md`
 - Protocol reference (v2 draft): `./protocol/v2/duotronic-bus-v2.md`
+- Protocol overview (v3 draft): `./protocol/v3/README.md`
+- Protocol specification (v3 draft): `./protocol/v3/docs/DBP-V3-SPEC.md`
+- Wire ABI (v3): `./protocol/v3/docs/WIRE-ABI.md`
 - DBP v2 S2 authority profile: `./protocol/v2/profiles/dbp-duotronics-witness-authority-s2-v1.md`
 - DBP v2 full-duplex profile: `./protocol/v2/profiles/dbp-full-duplex-witness-s2-mux-v1.md`
 - Duotronic Math v2 reference: `./protocol/ref/duotronic-math-v2.md`
@@ -233,6 +252,8 @@ See:
 ```text
 protocol/
   duotronic-bus.md                    # Canonical protocol reference
+  v2/                                 # DBP v2 draft line
+  v3/                                 # DBP v3 draft, implementation and docs
   wsb2_ref.mjs                        # WSB2 JS reference
   wsb2_ref.py                         # WSB2 Python reference
   dbp_ref.mjs                         # Shared JS protocol helpers
@@ -283,11 +304,16 @@ python protocol/wsb2_ref.py
 
 - `v1.x` remains fixed-shape Float32 frame line.
 - Legacy v1.1 snapshot is retained for archive/regression purposes.
-- Active protocol evolution is documented in `protocol/duotronic-bus.md` and supporting references.
+- DBP v3 is the current protocol development line; see `protocol/v3/README.md`
+  and `protocol/v3/docs/DBP-V3-SPEC.md`.
+- DBP v2 draft material remains available under `protocol/v2/`.
+- Earlier protocol versions and the v3 draft are covered by the repository's
+  dual license.
 
 ## License
 
-See `LICENSE`.
+The entire repository is dual-licensed under MIT or Apache-2.0, at your
+option. See `LICENSE`, `LICENSE-MIT`, and `LICENSE-APACHE`.
 
 
 ### DBP v2 added layout

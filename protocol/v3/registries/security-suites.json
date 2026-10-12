@@ -1,0 +1,8 @@
+{
+  "schema":"dbp3-security-suite-registry/v2",
+  "policy":"Negotiation MUST reject deprecated or forbidden suites. Experimental suites require explicit bilateral opt-in and MUST NOT satisfy production-required profiles.",
+  "suites":[
+    {"id":1,"name":"xavi-pq1-shake256-512-mldsa87-mlkem1024-kmac256-aes256gcmsiv","status":"required","provider":"xavi-void","production":true,"notes":"DBP binds to the Xavi-Void provider; DBP does not reimplement primitive cryptography."},
+    {"id":65281,"name":"development-hmac","status":"experimental","provider":"reference-tests-only","production":false,"notes":"Conformance vectors only. MUST NOT be negotiated for production traffic."}
+  ]
+}

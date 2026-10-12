@@ -1,0 +1,164 @@
+{
+  "schema": "dbp3-formal-model-coverage/v4",
+  "warning": "Hash locking detects drift only. Release CI also compiles Lean and runs TLA+ syntax/model checks. Neither mechanism alone proves implementation/spec equivalence.",
+  "mappings": [
+    {
+      "implementation": [
+        "src/dbp3/session.py",
+        "src/dbp3/replay.py"
+      ],
+      "formal": [
+        "formal/DBP3Session.tla",
+        "formal/DBP3Session.cfg",
+        "formal/DBP3ReplayRekey.tla"
+      ],
+      "invariants": [
+        "legal lifecycle transitions",
+        "compromised epochs do not resume",
+        "replay is sequence-window based"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/transaction.py"
+      ],
+      "formal": [
+        "formal/DBP3Transaction.tla"
+      ],
+      "invariants": [
+        "idempotent transaction identity",
+        "terminal result monotonicity"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/merge.py",
+        "src/dbp3/bounded_merge.py"
+      ],
+      "formal": [
+        "formal/DBP3BoundedMerge.tla",
+        "formal/DBP3BoundedMerge.cfg"
+      ],
+      "invariants": [
+        "bounded work per page",
+        "snapshot-bound cursor",
+        "eventual chunked convergence"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/quarantine.py",
+        "src/dbp3/supervisor.py",
+        "src/dbp3/revocation.py"
+      ],
+      "formal": [
+        "formal/DBP3Partition.tla",
+        "formal/DBP3Partition.cfg",
+        "formal/DBP3QuarantineReadmission.tla",
+        "formal/DBP3QuarantineReadmission.cfg",
+        "formal/lean/DBP3Invariants.lean"
+      ],
+      "invariants": [
+        "correlated path noise does not require mass peer quarantine",
+        "hard quarantine never lowers quorum threshold",
+        "quarantined peers require authenticated generation-bound readmission",
+        "peer reboot cannot reset quarantine chronology",
+        "revocations do not resurrect",
+        "active readmission requires verified proof and generation advancement"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/liveness.py",
+        "src/dbp3/supervisor.py"
+      ],
+      "formal": [
+        "formal/DBP3BootstrapContention.tla",
+        "formal/DBP3BootstrapContention.cfg"
+      ],
+      "invariants": [
+        "cold-start contention uses bounded retry",
+        "startup collision is path contention rather than peer quarantine",
+        "bootstrap does not require synchronized wall clock"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/profile_registry.py",
+        "src/dbp3/resource_budget.py",
+        "tools/verify_profiles.py",
+        "tools/generate_registry_code.py",
+        "tools/verify_registry_coherence.py"
+      ],
+      "formal": [
+        "formal/DBP3ProfileAdmission.tla",
+        "formal/DBP3ProfileAdmission.cfg"
+      ],
+      "invariants": [
+        "active profile requires semantic validation",
+        "active profile requires local resource admission",
+        "generated registry must be fresh",
+        "suite/FEC registrations and integer widths must be valid",
+        "platform address width and allocator capacity are distinct admission constraints"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/autonomy.py",
+        "src/dbp3/agent_comms.py",
+        "src/dbp3/witness.py"
+      ],
+      "formal": [
+        "formal/DBP3Autonomy.tla",
+        "formal/DBP3AgentComms.tla",
+        "formal/lean/DBP3Invariants.lean"
+      ],
+      "invariants": [
+        "authentication is not authority",
+        "blocked witness cannot mutate state",
+        "consent and delegation are distinct",
+        "peer loss does not lower quorum threshold"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/frame.py",
+        "src/dbp3/records.py",
+        "src/dbp3/generated_registry.py",
+        "rust/dbp3-ref/src/lib.rs",
+        "rust/dbp3-ref/src/generated_registry.rs",
+        "schemas/wire-abi.json",
+        "schemas/record-registry.json",
+        "schemas/algorithm-registry.json",
+        "registries/security-suites.json",
+        "registries/fec-policies.json",
+        "tools/verify_registry_coherence.py"
+      ],
+      "formal": [],
+      "invariants": [
+        "fixed ABI",
+        "one-origin structural IDs",
+        "unknown critical record rejection",
+        "zero padding",
+        "registry ID/name/status coherence"
+      ]
+    },
+    {
+      "implementation": [
+        "src/dbp3/fec.py",
+        "src/dbp3/group.py"
+      ],
+      "formal": [
+        "formal/DBP3GroupContainment.tla",
+        "formal/DBP3GroupContainment.cfg"
+      ],
+      "invariants": [
+        "FEC resource exhaustion fails closed",
+        "multicast requires explicit per-recipient record capability",
+        "group suite/frame compatibility",
+        "bounded multicast fragmentation/fanout/recovery",
+        "group membership increments key epoch"
+      ]
+    }
+  ]
+}

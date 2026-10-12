@@ -1,0 +1,22 @@
+{
+  "schema": "dbp3-unit-registry/v1",
+  "canonical": {
+    "distance": "m",
+    "altitude": "m",
+    "speed": "m/s",
+    "acceleration": "m/s^2",
+    "angle": "deg",
+    "angular_rate": "deg/s",
+    "time": "us",
+    "frequency": "Hz",
+    "pressure": "Pa",
+    "temperature": "K"
+  },
+  "altitude_datums": [
+    "WGS84_ELLIPSOID",
+    "MSL",
+    "AGL"
+  ],
+  "default_crs": "EPSG:4979",
+  "rule": "Units and datum MUST be explicit at profile/schema boundaries; implementations MUST NOT infer feet/metres or MSL/AGL."
+}

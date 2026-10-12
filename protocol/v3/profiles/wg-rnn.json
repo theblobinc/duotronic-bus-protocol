@@ -1,0 +1,47 @@
+{
+  "id": 3,
+  "name": "wg-rnn",
+  "protected": true,
+  "suite": "xavi-pq1-shake256-512-mldsa87-mlkem1024-kmac256-aes256gcmsiv",
+  "fec": "gf256",
+  "max_records": 64,
+  "replay_window": 2048,
+  "witness_gate_required_for_state_mutation": true,
+  "frame_sizes": [
+    256,
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "draft": "3.0.0-dev11",
+  "resource_class": "high-throughput",
+  "production": true,
+  "schema": "dbp3-wgrnn-profile/v2",
+  "extends": [
+    "dbp3-ai-free-1"
+  ],
+  "requires": [
+    "dbp3-core/0.10",
+    "dbp3-comms/1",
+    "dbp3-ai-comms/1",
+    "dbp3-ai-free/1",
+    "witness-binding",
+    "recurrent-gate"
+  ],
+  "record_names": [
+    "wgrnn-observation",
+    "wgrnn-observer-result",
+    "wgrnn-consensus",
+    "wgrnn-gate-receipt",
+    "wgrnn-model-provenance",
+    "wgrnn-synthesis-evidence"
+  ],
+  "features": [
+    "witness-gated-state-mutation",
+    "observer-consensus",
+    "model-provenance",
+    "secure-agent-comms",
+    "federation"
+  ]
+}

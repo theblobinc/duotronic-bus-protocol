@@ -1,0 +1,93 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  generated-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python tools/verify_generated_artifacts.py
+      - run: python tools/generate_vectors.py --check
+      - run: python tools/generate_resolved_profiles.py --check
+      - name: Regenerate deterministic artifacts and require a clean tree
+        run: |
+          python tools/generate_registry_code.py
+          python tools/generate_vectors.py
+          python tools/generate_resolved_profiles.py
+          git diff --exit-code
+      - run: python tools/verify_registry_coherence.py
+      - run: python tools/verify_profiles.py
+      - run: python tools/verify_negative_profiles.py
+      - run: python tools/verify_resolved_profiles.py
+
+  python:
+    runs-on: ubuntu-latest
+    needs: generated-artifacts
+    strategy:
+      matrix:
+        python-version: ['3.11','3.12','3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '${{ matrix.python-version }}'}
+      - run: python -m pip install -U pip pytest
+      - run: python -m pip install -e .
+      - run: pytest -q
+      - run: python tools/verify_generated_artifacts.py
+      - run: python tools/generate_vectors.py --check
+      - run: python tools/generate_resolved_profiles.py --check
+      - run: python tools/verify_abi.py
+      - run: python tools/verify_vectors.py
+      - run: python tools/verify_registry_coherence.py
+      - run: python tools/verify_profiles.py
+      - run: python tools/verify_negative_profiles.py
+      - run: python tools/verify_resolved_profiles.py
+      - run: python tools/verify_formal_lock.py
+      - run: python tools/fuzz_wire.py
+      - run: python tools/fuzz_profiles.py
+      - run: python examples/roundtrip.py
+      - run: python tools/verify_manifest.py
+
+  rust-parity:
+    runs-on: ubuntu-latest
+    needs: generated-artifacts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: dtolnay/rust-toolchain@stable
+      - run: python -m pip install -e .
+      - run: python tools/generate_registry_code.py --check
+      - run: python tools/verify_registry_coherence.py
+      - run: cargo test --manifest-path rust/dbp3-ref/Cargo.toml
+      - run: cargo build --manifest-path rust/dbp3-ref/Cargo.toml
+      - name: 32-bit architecture compile gate
+        run: |
+          rustup target add i686-unknown-linux-gnu
+          cargo check --manifest-path rust/dbp3-ref/Cargo.toml --target i686-unknown-linux-gnu
+      - run: python tools/differential_vectors.py
+
+  formal:
+    runs-on: ubuntu-latest
+    needs: generated-artifacts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install TLA+ tools 1.8.0
+        run: curl -fL --retry 3 -o /tmp/tla2tools.jar https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar
+      - name: Install Lean 4.19.0
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.19.0
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: python -m pip install -e .
+      - name: Active TLA+/Lean gate (hash update alone cannot satisfy this)
+        env:
+          TLA2TOOLS_JAR: /tmp/tla2tools.jar
+        run: python tools/verify_formal_lock.py --strict

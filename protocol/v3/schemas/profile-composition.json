@@ -1,0 +1,60 @@
+{
+  "schema": "dbp3-profile-composition/v3",
+  "rules": {
+    "inheritance": "A child extends parent capabilities. A protected parent cannot be weakened. Record/features are unioned and common frame sizes are intersected.",
+    "security_suite": "All profiles in a closure MUST resolve to the same registered suite unless an explicit experimental test composition is requested.",
+    "fec_policy": "A child MAY refine a parent FEC policy only through an explicit `extends` relation in registries/fec-policies.json. Unrelated policy changes fail closed.",
+    "max_records": "Resolved max_records is the minimum across the closure.",
+    "replay_window": "The leaf replay-window value is transcript-bound and local resource admission is mandatory.",
+    "resources": "Profile resolution never implies resource admission; every runtime performs local admission before activation/rekey.",
+    "unknown_critical": "MUST fail closed before dispatch.",
+    "unknown_noncritical": "MAY be skipped and surfaced diagnostically.",
+    "generated_contract": "Resolved manifests bind suite IDs/status, FEC algorithm IDs/bounds, record set and inheritance closure so different runtimes cannot silently reinterpret profile names."
+  },
+  "profiles": [
+    {
+      "name": "baseline-secure",
+      "extends": []
+    },
+    {
+      "name": "dbp3-comms-1",
+      "extends": [
+        "baseline-secure"
+      ]
+    },
+    {
+      "name": "dbp3-ai-comms-1",
+      "extends": [
+        "dbp3-comms-1"
+      ]
+    },
+    {
+      "name": "dbp3-ai-free-1",
+      "extends": [
+        "dbp3-ai-comms-1"
+      ]
+    },
+    {
+      "name": "xavi-utm",
+      "extends": [
+        "dbp3-ai-free-1"
+      ]
+    },
+    {
+      "name": "wg-rnn",
+      "extends": [
+        "dbp3-ai-free-1"
+      ]
+    }
+  ],
+  "overlay_constraints": [
+    {
+      "overlay": "privacy",
+      "rule": "Padding/cover traffic remains subordinate to emergency/control reservations and negotiated congestion ceilings."
+    },
+    {
+      "overlay": "resilience",
+      "rule": "FEC/interleaving cannot increase resource allocation solely from unauthenticated feedback."
+    }
+  ]
+}

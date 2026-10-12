@@ -1,0 +1,58 @@
+{
+  "id": 2,
+  "name": "xavi-utm",
+  "protected": true,
+  "suite": "xavi-pq1-shake256-512-mldsa87-mlkem1024-kmac256-aes256gcmsiv",
+  "fec": "adaptive-gf256",
+  "max_records": 48,
+  "replay_window": 1024,
+  "qos_order": [
+    "emergency",
+    "control",
+    "telemetry",
+    "text",
+    "voice",
+    "video",
+    "bulk"
+  ],
+  "frame_sizes": [
+    256,
+    512,
+    1024,
+    2048,
+    4096
+  ],
+  "draft": "3.0.0-dev11",
+  "resource_class": "edge",
+  "production": true,
+  "schema": "dbp3-xavi-utm-profile/v2",
+  "extends": [
+    "dbp3-ai-free-1"
+  ],
+  "requires": [
+    "dbp3-core/0.10",
+    "dbp3-comms/1",
+    "dbp3-ai-comms/1",
+    "dbp3-ai-free/1",
+    "witness-binding",
+    "human-decision-proof"
+  ],
+  "record_names": [
+    "utm-aircraft-state",
+    "utm-flight-plan",
+    "utm-conflict-proposal",
+    "utm-deconfliction-decision",
+    "utm-human-decision",
+    "utm-geofence",
+    "utm-weather-hazard",
+    "utm-emergency-condition"
+  ],
+  "features": [
+    "airspace-state",
+    "deconfliction",
+    "human-decision-proof",
+    "federated-utm",
+    "secure-comms",
+    "autonomous-agent-comms"
+  ]
+}

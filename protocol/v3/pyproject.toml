@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "duotronic-bus-protocol-v3"
+version = "3.0.0.dev11"
+description = "Reference implementation for the Duotronic Bus Protocol v3 mature secure autonomous-agent communications and federation draft"
+requires-python = ">=3.11"
+license = {text = "MIT OR Apache-2.0"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

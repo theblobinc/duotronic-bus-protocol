@@ -1,0 +1,127 @@
+{
+  "schema": "dbp3-golden-vectors/v0.11",
+  "development_key_hex": "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff",
+  "valid": [
+    {
+      "file": "valid-f256.dbp3",
+      "frame_size": 256,
+      "record_types": [
+        6
+      ]
+    },
+    {
+      "file": "valid-f512.dbp3",
+      "frame_size": 512,
+      "record_types": [
+        6
+      ]
+    },
+    {
+      "file": "valid-f1024.dbp3",
+      "frame_size": 1024,
+      "record_types": [
+        6
+      ]
+    },
+    {
+      "file": "valid-f2048.dbp3",
+      "frame_size": 2048,
+      "record_types": [
+        6
+      ]
+    },
+    {
+      "file": "valid-f4096.dbp3",
+      "frame_size": 4096,
+      "record_types": [
+        6
+      ]
+    },
+    {
+      "file": "valid-call-control-f512.dbp3",
+      "frame_size": 512,
+      "record_types": [
+        35
+      ]
+    },
+    {
+      "file": "valid-ai-proposal-f1024.dbp3",
+      "frame_size": 1024,
+      "record_types": [
+        106
+      ]
+    },
+    {
+      "file": "valid-ai-consent-f1024.dbp3",
+      "frame_size": 1024,
+      "record_types": [
+        123
+      ]
+    },
+    {
+      "file": "valid-readmission-challenge-f512.dbp3",
+      "frame_size": 512,
+      "record_types": [
+        142
+      ]
+    }
+  ],
+  "invalid": [
+    {
+      "file": "invalid-crc-f512.dbp3",
+      "reason": "CRC/authenticated bytes modified"
+    },
+    {
+      "file": "invalid-fence-f512.dbp3",
+      "reason": "version fence"
+    },
+    {
+      "file": "invalid-unknown-critical-f512.dbp3",
+      "reason": "authenticated unknown critical record"
+    },
+    {
+      "file": "invalid-fec-tuple-f512.dbp3",
+      "reason": "authenticated invalid FEC tuple"
+    },
+    {
+      "file": "invalid-record-message-zero-f512.dbp3",
+      "reason": "zero record message id"
+    },
+    {
+      "file": "invalid-fragment-count-zero-f512.dbp3",
+      "reason": "zero fragment count"
+    },
+    {
+      "file": "invalid-record-type-zero-f512.dbp3",
+      "reason": "zero record type"
+    },
+    {
+      "file": "invalid-profile-id-zero-f512.dbp3",
+      "reason": "zero profile id"
+    },
+    {
+      "file": "invalid-record-count-overflow-f512.dbp3",
+      "reason": "record count exceeds decoder limit"
+    },
+    {
+      "file": "invalid-record-padding-f512.dbp3",
+      "reason": "non-zero record padding"
+    },
+    {
+      "file": "invalid-protected-no-security-f512.dbp3",
+      "reason": "protected flag without security mode"
+    },
+    {
+      "file": "invalid-suite-mismatch-f512.dbp3",
+      "reason": "authenticated suite mismatch"
+    },
+    {
+      "file": "invalid-security-mode-f512.dbp3",
+      "reason": "unsupported security mode"
+    },
+    {
+      "file": "invalid-unregistered-fec-f512.dbp3",
+      "reason": "unregistered FEC scheme"
+    }
+  ]
+}

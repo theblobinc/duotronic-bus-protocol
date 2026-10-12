@@ -1,0 +1,17 @@
+{
+  "schema": "dbp3-error-registry/v1",
+  "errors": {
+    "1": "frame-shape",
+    "2": "crc-failure",
+    "3": "auth-failure",
+    "4": "replay-rejected",
+    "5": "malformed-record",
+    "6": "resource-limit",
+    "7": "fec-insufficient",
+    "8": "stale-witness",
+    "9": "authority-denied",
+    "10": "revoked",
+    "11": "expired-transaction",
+    "12": "unsupported-critical-extension"
+  }
+}

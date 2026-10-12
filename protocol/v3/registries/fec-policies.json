@@ -1,0 +1,31 @@
+{
+  "schema": "dbp3-fec-policy-registry/v1",
+  "policies": [
+    {
+      "name": "none",
+      "algorithm": "none",
+      "status": "optional",
+      "adaptive": false,
+      "min_k": 0,
+      "max_n": 0
+    },
+    {
+      "name": "gf256",
+      "algorithm": "gf256-systematic",
+      "status": "required",
+      "adaptive": false,
+      "min_k": 1,
+      "max_n": 255
+    },
+    {
+      "name": "adaptive-gf256",
+      "algorithm": "gf256-systematic",
+      "status": "required",
+      "adaptive": true,
+      "min_k": 1,
+      "max_n": 32,
+      "rule": "Authenticated local link state may reduce or increase parity only inside negotiated bounds; it may never bypass protection/authentication.",
+      "extends": "gf256"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "dbp3-privacy-profile/v1",
+  "optional": true,
+  "features": [
+    "fixed-size frames",
+    "padding buckets",
+    "bounded batching",
+    "cover frames",
+    "stream-id rotation"
+  ],
+  "warning": "Traffic shaping reduces metadata leakage but consumes bandwidth and is never implied by encryption alone."
+}

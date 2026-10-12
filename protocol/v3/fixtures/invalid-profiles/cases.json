@@ -1,0 +1,64 @@
+{
+  "schema": "dbp3-invalid-profile-cases/v1",
+  "cases": [
+    {
+      "name": "unknown-suite",
+      "target": "baseline-secure",
+      "patch": {
+        "suite": "unregistered-suite"
+      },
+      "error": "unregistered security suite"
+    },
+    {
+      "name": "unknown-critical-record-name",
+      "target": "dbp3-ai-free-1",
+      "patch": {
+        "record_names": [
+          "definitely-not-registered"
+        ]
+      },
+      "error": "unregistered record names"
+    },
+    {
+      "name": "incompatible-fec-refinement",
+      "target": "dbp3-ai-free-1",
+      "patch": {
+        "fec": "none"
+      },
+      "error": "incompatible FEC policy"
+    },
+    {
+      "name": "invalid-profile-id",
+      "target": "dbp3-ai-free-1",
+      "patch": {
+        "id": 70000
+      },
+      "error": "profile id outside u16"
+    },
+    {
+      "name": "unprotected-child",
+      "target": "dbp3-ai-free-1",
+      "patch": {
+        "protected": false
+      },
+      "error": "protected parent cannot be weakened"
+    },
+    {
+      "name": "no-common-frame",
+      "target": "dbp3-ai-free-1",
+      "patch": {
+        "frame_sizes": [
+          256
+        ]
+      },
+      "parent_patch": {
+        "dbp3-ai-comms-1": {
+          "frame_sizes": [
+            4096
+          ]
+        }
+      },
+      "error": "no common frame size"
+    }
+  ]
+}

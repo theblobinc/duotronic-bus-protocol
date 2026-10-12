@@ -1,0 +1,36 @@
+{
+  "schema": "dbp3-profile-index/v2",
+  "draft": "3.0.0-dev11",
+  "profiles": [
+    {
+      "id": 1,
+      "name": "baseline-secure",
+      "file": "baseline-secure.json"
+    },
+    {
+      "id": 2,
+      "name": "xavi-utm",
+      "file": "xavi-utm.json"
+    },
+    {
+      "id": 3,
+      "name": "wg-rnn",
+      "file": "wg-rnn.json"
+    },
+    {
+      "id": 4,
+      "name": "dbp3-comms-1",
+      "file": "comms.json"
+    },
+    {
+      "id": 5,
+      "name": "dbp3-ai-comms-1",
+      "file": "ai-comms.json"
+    },
+    {
+      "id": 6,
+      "name": "dbp3-ai-free-1",
+      "file": "ai-free.json"
+    }
+  ]
+}
